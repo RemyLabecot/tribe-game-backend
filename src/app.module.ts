@@ -1,10 +1,8 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import {Module} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { PlayerModule } from './player/player.module';
-import { AuthModule } from './auth/auth.module';
+import {ConfigModule} from '@nestjs/config';
+import {AuthModule} from './infrastructure/auth/auth.module';
+import {RestModule} from "./presentation/rest.module";
 
 @Module({
   imports: [
@@ -13,12 +11,13 @@ import { AuthModule } from './auth/auth.module';
       type: 'postgres',
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
-      synchronize: true
+      synchronize: true,
+      logging: true
     }),
-    PlayerModule,
-    AuthModule
+    AuthModule,
+    RestModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
