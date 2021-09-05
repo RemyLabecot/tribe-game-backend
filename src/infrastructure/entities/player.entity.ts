@@ -1,6 +1,7 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {BeforeInsert, Column, Entity, Generated, PrimaryGeneratedColumn} from "typeorm";
+import {IsEmail} from "class-validator";
 
-@Entity()
+@Entity('player')
 export class PlayerEntity {
 
     @PrimaryGeneratedColumn()
@@ -10,9 +11,10 @@ export class PlayerEntity {
     name: string;
 
     @Column({unique: true})
+    @IsEmail()
     email: string;
 
-    @Column({select: false})
+    @Column({select: true})
     password: string;
 
     @BeforeInsert()
