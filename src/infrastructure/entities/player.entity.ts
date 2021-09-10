@@ -1,5 +1,6 @@
-import {BeforeInsert, Column, Entity, Generated, PrimaryGeneratedColumn} from "typeorm";
+import {BeforeInsert, Column, Entity, Generated, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {IsEmail} from "class-validator";
+import {CharacterEntity} from "./character.entity";
 
 @Entity('player')
 export class PlayerEntity {
@@ -16,6 +17,10 @@ export class PlayerEntity {
 
     @Column({select: true})
     password: string;
+
+    @Column("int", {array: true, nullable: true})
+    @OneToMany(() => CharacterEntity, characterEntity => characterEntity.playerId)
+    characters: CharacterEntity[];
 
     @BeforeInsert()
     emailToLowerCase() {

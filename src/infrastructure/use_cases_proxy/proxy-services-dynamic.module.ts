@@ -7,6 +7,8 @@ import {RepositoriesModule} from "../pgRepositories/repositories.module";
 import {LoginPlayer} from "../../domain/player/usecases/login.player";
 import {AuthRepository} from "../../domain/player/repositories/auth.repository";
 import {AuthModule} from "../auth/auth.module";
+import {PgCharacterRepository} from "../pgRepositories/pgCharacter.repository";
+import {CreateCharacter} from "../../domain/character/usecases/create-character";
 
 @Module({
     imports: [RepositoriesModule, AuthModule]
@@ -15,6 +17,7 @@ export class ProxyServicesDynamicModule {
 
     static CREATE_PLAYER_DATA_PROXY_SERVICE: string = 'CreatePlayerDataProxyService';
     static LOGIN_PLAYER_DATA_PROXY_SERVICE: string = 'LoginPlayerDataProxyService';
+    static CREATE_CHARACTER_DATA_PROXY_SERVICE: string = 'CreateCharacterDataProxyService';
 
     static register(): DynamicModule {
         return {
@@ -30,8 +33,13 @@ export class ProxyServicesDynamicModule {
                     provide: ProxyServicesDynamicModule.LOGIN_PLAYER_DATA_PROXY_SERVICE,
                     useFactory: (pgPlayerRepository: PgPlayerRepository, authRepository: AuthRepository) => new UseCaseProxy(new LoginPlayer(pgPlayerRepository, authRepository)),
                 },
+                {
+                    inject: [PgCharacterRepository],
+                    provide: ProxyServicesDynamicModule.CREATE_CHARACTER_DATA_PROXY_SERVICE,
+                    useFactory: (pgCharacterRepository: PgCharacterRepository) => new UseCaseProxy(new CreateCharacter(pgCharacterRepository))
+                }
             ],
-            exports: [ProxyServicesDynamicModule.CREATE_PLAYER_DATA_PROXY_SERVICE, ProxyServicesDynamicModule.LOGIN_PLAYER_DATA_PROXY_SERVICE]
+            exports: [ProxyServicesDynamicModule.CREATE_PLAYER_DATA_PROXY_SERVICE, ProxyServicesDynamicModule.LOGIN_PLAYER_DATA_PROXY_SERVICE, ProxyServicesDynamicModule.CREATE_CHARACTER_DATA_PROXY_SERVICE]
         };
     }
 }

@@ -1,4 +1,4 @@
-import {CreatePlayerDto} from "../models/dto/CreatePlayer.dto";
+import {CreatePlayerDto} from "../models/dto/create-player.dto";
 import {Player} from "../models/player";
 
 export interface PlayerRepository {

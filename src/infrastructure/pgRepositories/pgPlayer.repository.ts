@@ -3,7 +3,7 @@ import {PlayerRepository} from "../../domain/player/repositories/player.reposito
 import {InjectRepository} from '@nestjs/typeorm';
 import {PlayerEntity} from "../entities/player.entity";
 import {Repository} from "typeorm";
-import {CreatePlayerDto} from "../../domain/player/models/dto/CreatePlayer.dto";
+import {CreatePlayerDto} from "../../domain/player/models/dto/create-player.dto";
 import {Player} from "../../domain/player/models/player";
 
 @Injectable()

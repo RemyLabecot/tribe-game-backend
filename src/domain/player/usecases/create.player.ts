@@ -1,5 +1,5 @@
 import {PlayerRepository} from "../repositories/player.repository";
-import {CreatePlayerDto} from "../models/dto/CreatePlayer.dto";
+import {CreatePlayerDto} from "../models/dto/create-player.dto";
 import {Player} from "../models/player";
 import {AuthRepository} from "../repositories/auth.repository";
 import {InvalidPlayerError} from "../invalid-player.error";

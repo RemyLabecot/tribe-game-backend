@@ -1,5 +1,5 @@
 import {IsString} from "class-validator";
-import {LoginPlayerDto} from "./LoginPlayer.dto";
+import {LoginPlayerDto} from "./login-player.dto";
 
 
 export class CreatePlayerDto extends LoginPlayerDto {
