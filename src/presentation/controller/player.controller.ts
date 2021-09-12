@@ -34,8 +34,8 @@ export class PlayerController {
 
     // for test
     @UseGuards(JwtAuthGuard)
-    @Get(':id')
-    findById(@Param('id') id: number): Promise<Player> {
-        return this.loginPlayer.getInstance().findById(id);
+    @Get(':email')
+    findByEmail(@Param('email') email: string): Promise<Player> {
+        return this.loginPlayer.getInstance().findByEmail(email);
     }
 }

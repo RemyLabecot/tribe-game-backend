@@ -19,7 +19,7 @@ export class PlayerEntity {
     password: string;
 
     @Column("int", {array: true, nullable: true})
-    @OneToMany(() => CharacterEntity, characterEntity => characterEntity.playerId)
+    @OneToMany(() => CharacterEntity, characterEntity => characterEntity.player, {onDelete: 'CASCADE'})
     characters: CharacterEntity[];
 
     @BeforeInsert()

@@ -10,7 +10,7 @@ export class LoginPlayer {
 
     login(loginPlayerDto: LoginPlayerDto): Promise<string> {
 
-        return this.playerRepository.findByMail(loginPlayerDto.email)
+        return this.findByEmail(loginPlayerDto.email)
             .then((player: Player) => {
                 if(player) {
                     return this.validatePassword(loginPlayerDto.password, player.password)
@@ -27,6 +27,10 @@ export class LoginPlayer {
                     throw new Error("Player with this email/password doesn\'t exist");
                 }
             });
+    }
+
+    public findByEmail(email: string): Promise<Player> {
+        return this.playerRepository.findByMail(email);
     }
 
     public findById(id: number): Promise<Player> {

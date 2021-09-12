@@ -7,6 +7,8 @@ export class CreateCharacter {
 
     private characterRepository: CharacterRepository;
 
+    static readonly DEFAULT_SKILL_POINTS = 12;
+
     constructor(characterRepository: CharacterRepository) {
         this.characterRepository = characterRepository;
     }
@@ -19,12 +21,12 @@ export class CreateCharacter {
     }
 
     private toCharacter(createCharacter: CreateCharacterDto): Character {
-        return new Character(createCharacter.name, createCharacter.skillPoints, createCharacter.health, createCharacter.attack, createCharacter.defense, createCharacter.magik, createCharacter.level, createCharacter.playerId);
+        return new Character(createCharacter.imageUrl, createCharacter.skillPoints, createCharacter.health, createCharacter.attack, createCharacter.defense, createCharacter.magik, createCharacter.level, createCharacter.playerId);
     }
 
     private checkSkillPointsAwarding(createCharacter: CreateCharacterDto): number {
         const skillsAwardingCost = this.skillsAwardingCost(createCharacter);
-        if ((createCharacter.skillPoints - skillsAwardingCost) < 0) {
+        if ((CreateCharacter.DEFAULT_SKILL_POINTS - skillsAwardingCost) < 0) {
             throw new InvalidCharacterError("Not enough skill points");
         }
         return skillsAwardingCost;

@@ -16,6 +16,10 @@ export class PgCharacterRepository implements CharacterRepository {
         return this.toCharacter(savedCharacter);
     }
 
+    findCharacters(id: number): Promise<Character[]> {
+        return this.characterRepository.createQueryBuilder("character").where("character.playerId = :id", {id: id}).getMany();
+    }
+
     private toCharacterEntity(character: Character): CharacterEntity {
 
         const characterEntity = new CharacterEntity();
@@ -24,7 +28,7 @@ export class PgCharacterRepository implements CharacterRepository {
         characterEntity.defense = character.defense;
         characterEntity.magik = character.magik;
         characterEntity.health = character.health;
-        characterEntity.name = character.name;
+        characterEntity.imageUrl = character.imageUrl;
         characterEntity.skillPoints = character.skillPoints;
         characterEntity.level = 1;
         characterEntity.playerId = character.playerId;
@@ -33,6 +37,6 @@ export class PgCharacterRepository implements CharacterRepository {
     }
 
     private toCharacter(characterEntity: CharacterEntity): Character {
-        return new Character(characterEntity.name, characterEntity.skillPoints, characterEntity.health, characterEntity.attack, characterEntity.defense, characterEntity.magik, characterEntity.level, characterEntity.playerId);
+        return new Character(characterEntity.imageUrl, characterEntity.skillPoints, characterEntity.health, characterEntity.attack, characterEntity.defense, characterEntity.magik, characterEntity.level, characterEntity.playerId);
     }
 }

@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn, RelationId} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, RelationId} from "typeorm";
 import {PlayerEntity} from "./player.entity";
 
 @Entity('character')
@@ -8,7 +8,7 @@ export class CharacterEntity {
     id: number;
 
     @Column()
-    name: string;
+    imageUrl: string;
 
     @Column()
     skillPoints: number = 12;
@@ -29,8 +29,9 @@ export class CharacterEntity {
     level: number;
 
     @ManyToOne(() => PlayerEntity, playerEntity => playerEntity.characters)
+    @JoinColumn({name: 'playerId'})
     player: PlayerEntity;
 
-    @RelationId((character: CharacterEntity) => character.player)
+    @Column()
     playerId: number;
 }
