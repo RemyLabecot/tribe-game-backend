@@ -6,17 +6,18 @@ import {AuthService} from './auth.service';
 import {JwtStrategy} from './strategies/jwt.strategy';
 
 @Module({
-  imports: [
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get('JWT_SECRET'),
-        signOptions: {expiresIn: '10000s'}
-      })
-    })
-  ],
-  providers: [AuthService, JwtStrategy, JwtAuthGuard],
-  exports: [AuthService]
+    imports: [
+        JwtModule.registerAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: async (configService: ConfigService) => ({
+                secret: configService.get('JWT_SECRET'),
+                signOptions: {expiresIn: '10000s'}
+            })
+        })
+    ],
+    providers: [AuthService, JwtStrategy, JwtAuthGuard],
+    exports: [AuthService]
 })
-export class AuthModule {}
+export class AuthModule {
+}

@@ -2,6 +2,10 @@
 
 docker-compose up
 
+#launch test
+
+npm test
+
 # Outils à installer
 - NPM
 - Node.js

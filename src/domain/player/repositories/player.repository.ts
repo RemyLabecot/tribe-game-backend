@@ -1,8 +1,9 @@
-import {CreatePlayerDto} from "../models/dto/create-player.dto";
 import {Player} from "../models/player";
 
 export interface PlayerRepository {
-    save(player: CreatePlayerDto): Promise<Player>;
+    save(player: Player): Promise<Player>;
+
     findByMail(email: string): Promise<Player>;
+
     findById(id: number): Promise<Player>;
 }

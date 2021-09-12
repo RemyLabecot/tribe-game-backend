@@ -1,1 +1,6 @@
-export class InvalidPlayerError extends Error {}
+export class InvalidPlayerError extends Error {
+
+    constructor(message: string) {
+        super(message);
+    }
+}

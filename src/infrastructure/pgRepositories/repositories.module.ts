@@ -10,4 +10,5 @@ import {PgCharacterRepository} from "./pgCharacter.repository";
     providers: [PgPlayerRepository, PgCharacterRepository],
     exports: [PgPlayerRepository, PgCharacterRepository],
 })
-export class RepositoriesModule {}
+export class RepositoriesModule {
+}

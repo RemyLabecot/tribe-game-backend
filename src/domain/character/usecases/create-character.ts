@@ -38,7 +38,7 @@ export class CreateCharacter {
 
     private incrementSkillCost(skillCost: number): number {
         let cost = 0;
-        while (skillCost > 0) {
+        while (skillCost > 1) {
             cost += Math.ceil(skillCost / 5);
             skillCost--;
         }

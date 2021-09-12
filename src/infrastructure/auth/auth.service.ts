@@ -3,12 +3,13 @@ import {JwtService} from '@nestjs/jwt';
 import {Player} from 'src/domain/player/models/player';
 import {AuthRepository} from "../../domain/player/repositories/auth.repository";
 
-const bcrypt = require ('bcrypt');
+const bcrypt = require('bcrypt');
 
 @Injectable()
-export class AuthService implements AuthRepository{
+export class AuthService implements AuthRepository {
 
-    constructor(private readonly jwtService: JwtService) {}
+    constructor(private readonly jwtService: JwtService) {
+    }
 
     generateJwt(player: Player): Promise<string> {
         return this.jwtService.signAsync({player});
@@ -18,7 +19,7 @@ export class AuthService implements AuthRepository{
         return bcrypt.hash(password, 12);
     }
 
-    comparePasswords(password: string, storedPasswordHash: string): Promise<any> {
+    comparePasswords(password: string, storedPasswordHash: string): Promise<boolean> {
         return bcrypt.compare(password, storedPasswordHash);
     }
 }

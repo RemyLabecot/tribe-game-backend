@@ -16,7 +16,7 @@ export class CreatePlayer {
                     if (!exist) {
                         return this.authRepository.hashPassword(createdPlayerDto.password)
                             .then((hashPassword: string) => {
-                                return this.playerRepository.save(new CreatePlayerDto(createdPlayerDto.email, hashPassword, createdPlayerDto.name));
+                                return this.playerRepository.save(new Player(null, createdPlayerDto.name, createdPlayerDto.email, hashPassword));
                             })
                     } else {
                         throw new InvalidPlayerError("Player with this email already exist");

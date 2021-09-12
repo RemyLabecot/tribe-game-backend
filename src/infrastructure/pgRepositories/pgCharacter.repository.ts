@@ -8,7 +8,8 @@ import {Character} from "../../domain/character/models/character";
 @Injectable()
 export class PgCharacterRepository implements CharacterRepository {
 
-    constructor(@InjectRepository(CharacterEntity) private readonly characterRepository: Repository<CharacterEntity>) {}
+    constructor(@InjectRepository(CharacterEntity) private readonly characterRepository: Repository<CharacterEntity>) {
+    }
 
     async create(character: Character): Promise<Character> {
 

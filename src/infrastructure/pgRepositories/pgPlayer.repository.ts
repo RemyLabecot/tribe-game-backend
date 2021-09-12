@@ -3,7 +3,6 @@ import {PlayerRepository} from "../../domain/player/repositories/player.reposito
 import {InjectRepository} from '@nestjs/typeorm';
 import {PlayerEntity} from "../entities/player.entity";
 import {Repository} from "typeorm";
-import {CreatePlayerDto} from "../../domain/player/models/dto/create-player.dto";
 import {Player} from "../../domain/player/models/player";
 
 @Injectable()
@@ -17,11 +16,9 @@ export class PgPlayerRepository implements PlayerRepository {
         return this.toPlayer(playerEntity);
     }
 
-    async save(player: CreatePlayerDto): Promise<Player> {
+    async save(player: Player): Promise<Player> {
         const playerEntity = this.toPlayerEntity(player);
-
         const savedPlayer: PlayerEntity = await this.playerRepository.save(playerEntity);
-
         return this.toPlayer(savedPlayer);
     }
 
@@ -31,7 +28,7 @@ export class PgPlayerRepository implements PlayerRepository {
         return this.toPlayer(playerEntity);
     }
 
-    private toPlayerEntity(player: CreatePlayerDto): PlayerEntity {
+    private toPlayerEntity(player: Player): PlayerEntity {
         const playerEntity: PlayerEntity = new PlayerEntity();
 
         playerEntity.email = player.email;

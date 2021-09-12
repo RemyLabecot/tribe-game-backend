@@ -9,6 +9,10 @@ import {CharacterController} from "./controller/character.controller";
 @Module({
     imports: [ProxyServicesDynamicModule.register()],
     controllers: [PlayerController, CharacterController],
-    providers: [{ provide: APP_FILTER, useClass: InvalidPlayerErrorFilter }, { provide: APP_FILTER, useClass: InvalidCharacterError}],
+    providers: [{provide: APP_FILTER, useClass: InvalidPlayerErrorFilter}, {
+        provide: APP_FILTER,
+        useClass: InvalidCharacterError
+    }],
 })
-export class RestModule {}
+export class RestModule {
+}

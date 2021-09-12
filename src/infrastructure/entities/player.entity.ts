@@ -1,4 +1,4 @@
-import {BeforeInsert, Column, Entity, Generated, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {IsEmail} from "class-validator";
 import {CharacterEntity} from "./character.entity";
 

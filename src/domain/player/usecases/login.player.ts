@@ -6,25 +6,24 @@ import {InvalidPlayerError} from "../invalid-player.error";
 
 export class LoginPlayer {
 
-    constructor(private playerRepository: PlayerRepository, private authRepository: AuthRepository){}
+    constructor(private playerRepository: PlayerRepository, private authRepository: AuthRepository) {
+    }
 
     login(loginPlayerDto: LoginPlayerDto): Promise<string> {
 
         return this.findByEmail(loginPlayerDto.email)
             .then((player: Player) => {
-                if(player) {
+                if (player) {
                     return this.validatePassword(loginPlayerDto.password, player.password)
                         .then((passwordMatches: boolean) => {
-                            if(passwordMatches) {
-                                return this.findById(player.id).then(
-                                    (player: Player) => {return this.authRepository.generateJwt(player)}
-                                )
+                            if (passwordMatches) {
+                                return this.authRepository.generateJwt(player);
                             } else {
                                 throw new InvalidPlayerError('Wrong password');
                             }
                         })
                 } else {
-                    throw new Error("Player with this email/password doesn\'t exist");
+                    throw new InvalidPlayerError("Player with this email/password doesn\'t exist");
                 }
             });
     }
@@ -33,7 +32,7 @@ export class LoginPlayer {
         return this.playerRepository.findByMail(email);
     }
 
-    public findById(id: number): Promise<Player> {
+    private findById(id: number): Promise<Player> {
         return this.playerRepository.findById(id);
     }
 

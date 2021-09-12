@@ -12,7 +12,8 @@ import {LoginPlayer} from "../../domain/player/usecases/login.player";
 export class PlayerController {
 
     constructor(@Inject(ProxyServicesDynamicModule.CREATE_PLAYER_DATA_PROXY_SERVICE) private readonly createPlayer: UseCaseProxy<CreatePlayer>,
-                @Inject(ProxyServicesDynamicModule.LOGIN_PLAYER_DATA_PROXY_SERVICE) private readonly loginPlayer: UseCaseProxy<LoginPlayer>) {}
+                @Inject(ProxyServicesDynamicModule.LOGIN_PLAYER_DATA_PROXY_SERVICE) private readonly loginPlayer: UseCaseProxy<LoginPlayer>) {
+    }
 
     @Post()
     create(@Body() createdPlayerDto: CreatePlayerDto): Promise<Player> {
@@ -32,7 +33,6 @@ export class PlayerController {
             });
     }
 
-    // for test
     @UseGuards(JwtAuthGuard)
     @Get(':email')
     findByEmail(@Param('email') email: string): Promise<Player> {

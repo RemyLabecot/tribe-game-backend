@@ -1,1 +1,2 @@
-export class InvalidCharacterError extends Error {}
+export class InvalidCharacterError extends Error {
+}
